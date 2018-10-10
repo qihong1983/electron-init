@@ -22,7 +22,7 @@ function createWindow() {
   });
 
   //调试
-  imageWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 
 
   imageWindow = new BrowserWindow({
@@ -31,6 +31,10 @@ function createWindow() {
     parent: mainWindow,
     show: false
   });
+
+  imageWindow.webContents.openDevTools()
+
+
   settingsWindow = new BrowserWindow({
     width: 200,
     height: 600,
@@ -42,8 +46,8 @@ function createWindow() {
   console.log(path.join(__dirname, '../build/index.html'));
 
   mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
-  imageWindow.loadURL(isDev ? 'http://localhost:3000/image' : `file://${path.join(__dirname, '../build/index.html#image')}`);
-  settingsWindow.loadURL(isDev ? 'http://localhost:3000/settings' : `file://${path.join(__dirname, '../build/index.html#/settings')}`);
+  imageWindow.loadURL(isDev ? 'http://localhost:3000/#/image' : `file://${path.join(__dirname, '../build/index.html#image')}`);
+  settingsWindow.loadURL(isDev ? 'http://localhost:3000/#/settings' : `file://${path.join(__dirname, '../build/index.html#/settings')}`);
 
 
   mainWindow.on('closed', () => mainWindow = null);
@@ -78,7 +82,6 @@ ipcMain.on('toggle-image', (event, arg) => {
   imageWindow.webContents.send('image', arg);
 })
 
-
 ipcMain.on('toggle-settings', () => {
   settingsWindow.isVisible() ? settingsWindow.hide() : settingsWindow.show();
 })
@@ -90,3 +93,8 @@ ipcMain.on('close-main', (event, arg) => {
   mainWindow.close();
 
 })
+
+/**
+ * windows上用
+ */
+//if (require('electron-squirrel-startup')) return;

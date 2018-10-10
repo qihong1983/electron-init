@@ -1,6 +1,6 @@
 {
   "name": "electron-react-example",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "asar": "~0.14.5",
@@ -17,10 +17,11 @@
     "eject": "react-scripts eject",
     "dist": "build --div",
     "dmg": "build",
+    "winpack": "electron-packager . myapp --overwrite --win=x32 --out ./HelloWorldApp --arch=x64 --app-version=1.0.0 --electron-version=3.0.2",
     "asar": "asar pack MyApp-darwin-x64/MyApp.app/Contents/Resources/app MyApp-darwin-x64/MyApp.app/Contents/Resources/app.asar",
     "electron-dev": "concurrently \"BROWSER=none npm run start\" \"wait-on http://localhost:3000 && electron . \"",
     "electron-start": "concurrently \"electron .\"",
-    "pack": "electron-packager . MyApp --ignore=node_modules/electorn-*  --electron-version=3.0.2 && cp -rvf Icon.icns MyApp-darwin-x64/MyApp.app/Contents/Resources/electron.icns",
+    "pack": "electron-packager . MyApp --ignore=node_modules/electorn-* --app-version=1.0.0 --electron-version=3.0.2 && cp -rvf Icon.icns MyApp-darwin-x64/MyApp.app/Contents/Resources/electron.icns",
     "electron-fe": "concurrently \"BROWSER=none npm run start\" \"wait-on http://localhost:3000\""
   },
   "eslintConfig": {
@@ -40,6 +41,8 @@
     "electron": "~3.0.2",
     "electron-builder": "~20.28.4",
     "electron-packager": "~12.2.0",
+    "electron-squirrel-startup": "~1.0.0",
+    "electron-winstaller": "~2.7.0",
     "fsevents": "~1.2.4",
     "loadash": "~1.0.0",
     "moment": "~2.22.2",
