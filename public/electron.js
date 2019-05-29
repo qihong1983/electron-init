@@ -13,23 +13,38 @@ let imageWindow;
 let settingsWindow;
 
 function createWindow() {
+  // mainWindow = new BrowserWindow({
+  //   width: 900,
+  //   height: 680,
+  //   webPreferences: {
+  //     webSecurity: false,
+  //     preload: path.join(__dirname, '../public/renderer.js')
+  //   }
+  // });
+
+
   mainWindow = new BrowserWindow({
     width: 900,
     height: 680,
     webPreferences: {
-      webSecurity: false
+      webSecurity: false,
+      nodeIntegration: true
     }
   });
 
   //调试
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
 
   imageWindow = new BrowserWindow({
     width: 1024,
     height: 681,
     parent: mainWindow,
-    show: false
+    show: false,
+    webPreferences: {
+      webSecurity: false,
+      nodeIntegration: true
+    }
   });
 
   imageWindow.webContents.openDevTools()
@@ -43,11 +58,11 @@ function createWindow() {
   });
 
 
-  console.log(path.join(__dirname, '../build/index.html'));
+  // console.log(path.join(__dirname, '../build/index.html'));
 
-  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
-  imageWindow.loadURL(isDev ? 'http://localhost:3000/#/image' : `file://${path.join(__dirname, '../build/index.html#image')}`);
-  settingsWindow.loadURL(isDev ? 'http://localhost:3000/#/settings' : `file://${path.join(__dirname, '../build/index.html#/settings')}`);
+  mainWindow.loadURL(true ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
+  imageWindow.loadURL(true ? 'http://localhost:3000/#/image' : `file://${path.join(__dirname, '../build/index.html#image')}`);
+  settingsWindow.loadURL(true ? 'http://localhost:3000/#/settings' : `file://${path.join(__dirname, '../build/index.html#/settings')}`);
 
 
   mainWindow.on('closed', () => mainWindow = null);

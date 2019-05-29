@@ -1,7 +1,7 @@
 import React from 'react';
 
-const electron = window.require('electron');
-const ipcRenderer = electron.ipcRenderer;
+// const electron = window.require('electron');
+
 
 
 export default class Image extends React.Component {
@@ -15,6 +15,12 @@ export default class Image extends React.Component {
 	}
 
 	componentDidMount() {
+		const electron = window.electron;
+
+		console.log(window.electron, '***');
+
+		const ipcRenderer = window.electron.ipcRenderer;
+
 		ipcRenderer.on('image', (event, arg) => {
 			console.log(event, arg);
 			this.setState({
@@ -26,7 +32,7 @@ export default class Image extends React.Component {
 	render() {
 		return (
 			<div>
-				<img src={this.state.imageUrl} style={{maxWidth: "1024px"}} />
+				<img src={this.state.imageUrl} style={{ maxWidth: "1024px" }} />
 			</div>
 		);
 	}

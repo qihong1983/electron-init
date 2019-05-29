@@ -9,13 +9,18 @@ import {
 } from 'react-router';
 
 
-const electron = window.require('electron');
-const ipcRenderer = electron.ipcRenderer;
+// const electron = window.require('electron');
+// const electron = require('electron');
+
+// const electron = window.electron;
 
 
-const remote = electron.remote;
-const Menu = electron.remote.Menu;
-const MenuItem = electron.remote.MenuItem;
+// const ipcRenderer = window.electron.ipcRenderer;
+
+
+// const remote = electron.remote;
+// const Menu = electron.remote.Menu;
+// const MenuItem = electron.remote.MenuItem;
 
 
 
@@ -23,20 +28,41 @@ class App extends Component {
 
 
   componentDidMount() {
+
+
+
     this.initMenu();
     this.contextmenuInit();
 
-    console.log(electron.remote);
-    console.log(window);
+
   }
 
   clickHandle = (img) => {
+
+    const electron = window.electron;
+
+
+    const ipcRenderer = window.electron.ipcRenderer;
+
+
+    const remote = window.electron.remote;
+    const Menu = window.electron.remote.Menu;
+    const MenuItem = window.electron.remote.MenuItem;
 
     ipcRenderer.send('toggle-image', img);
 
   }
 
   initMenu = () => {
+    const electron = window.electron;
+
+
+    const ipcRenderer = window.electron.ipcRenderer;
+
+
+    const remote = window.electron.remote;
+    const Menu = window.electron.remote.Menu;
+    const MenuItem = window.electron.remote.MenuItem;
 
     const menu = Menu.buildFromTemplate([{
       label: "File",
@@ -46,6 +72,17 @@ class App extends Component {
         label: "Settings",
         accelerator: "CmdOrCtrl+,",
         click: () => {
+
+          const electron = window.electron;
+
+
+          const ipcRenderer = window.electron.ipcRenderer;
+
+
+          const remote = electron.remote;
+          const Menu = electron.remote.Menu;
+          const MenuItem = electron.remote.MenuItem;
+
           ipcRenderer.send("toggle-settings");
         }
       }, {
@@ -70,6 +107,18 @@ class App extends Component {
   }
 
   contextmenuInit = () => {
+
+    const electron = window.electron;
+
+
+    const ipcRenderer = window.electron.ipcRenderer;
+
+
+    const remote = window.electron.remote;
+    const Menu = window.electron.remote.Menu;
+    const MenuItem = window.electron.remote.MenuItem;
+
+
     const menu = new Menu();
     menu.append(new MenuItem({
       label: '右键菜单一',
@@ -108,6 +157,16 @@ class App extends Component {
 
   closeApp() {
     // alert(33);
+
+    const electron = window.electron;
+
+
+    const ipcRenderer = window.electron.ipcRenderer;
+
+
+    const remote = electron.remote;
+    const Menu = electron.remote.Menu;
+    const MenuItem = electron.remote.MenuItem;
     ipcRenderer.send('close-main');
 
   }
@@ -128,15 +187,15 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-         
+
           {this.props.children}
         </header>
         <p>
           <Link to="/">Home</Link>
         </p>
-        
-      
-        
+
+
+
         <p>
           <Link to="/contact">联系我</Link>
         </p>
@@ -146,13 +205,13 @@ class App extends Component {
         </p>
 
         <p>
-          <span onClick={()=> this.closeApp()}>关闭app</span>
+          <span onClick={() => this.closeApp()}>关闭app</span>
         </p>
         <h3>点击图像打开新窗口并传图片</h3>
         {/*<img src={require("./logo.svg")} style={{width:"100px", height:"100px"}}></img>*/}
 
         <span onClick={() => this.clickHandle("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539074090524&di=82b1b193a2440f6cc4fc6430153d221d&imgtype=0&src=http%3A%2F%2Fpic30.nipic.com%2F20130605%2F7447430_151725918000_2.jpg")}>
-        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539074090524&di=82b1b193a2440f6cc4fc6430153d221d&imgtype=0&src=http%3A%2F%2Fpic30.nipic.com%2F20130605%2F7447430_151725918000_2.jpg" style={{width:"100px", height:"100px"}}></img>
+          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1539074090524&di=82b1b193a2440f6cc4fc6430153d221d&imgtype=0&src=http%3A%2F%2Fpic30.nipic.com%2F20130605%2F7447430_151725918000_2.jpg" style={{ width: "100px", height: "100px" }}></img>
         </span>
       </div>
     );
